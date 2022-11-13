@@ -11,7 +11,7 @@ def init():
     Parses the config.yaml file and gets the values provided
     """
 
-    config = yaml.load_all(open("../config.yaml"), Loader=yaml.FullLoader)  # Load the full file
+    config = yaml.load_all(open("../../config.yaml"), Loader=yaml.FullLoader)  # Load the full file
 
     for c in config:  # Iterates over the yaml documents
         for k, v in c.items():  # Iterates over the items in the document
