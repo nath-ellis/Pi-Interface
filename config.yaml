@@ -1,0 +1,10 @@
+---
+# Colours in (r, g, b) format
+Theme:
+  primary: (108, 204, 98)
+  secondary: (98, 204, 141)
+  background: (0, 0, 0)
+---
+Services:
+  clock: true
+...
