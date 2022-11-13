@@ -1,3 +1,7 @@
+"""
+Main python file
+"""
+
 import pygame
 from pygame import *
 
