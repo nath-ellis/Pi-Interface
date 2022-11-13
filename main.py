@@ -26,3 +26,6 @@ while running:
             running = False
 
     redraw()
+
+pygame.quit()
+quit()
