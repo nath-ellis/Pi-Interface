@@ -9,7 +9,7 @@ class Values:
     """
     For global variables
     """
-    clock = pygame.time.Clock()
+    pygame_clock = pygame.time.Clock()
     screen = pygame.display.set_mode((480, 320))
 
     # Colours
