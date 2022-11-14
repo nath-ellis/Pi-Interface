@@ -5,7 +5,7 @@ __init__.py
 import pygame
 from pygame import *
 import config
-import globals
+import values
 import services
 
 
@@ -14,9 +14,9 @@ def redraw():
     Clears the window and redraws everything.
     Runs 30 times per second.
     """
-    globals.Values.pygame_clock.tick(globals.Settings.fps)
+    values.Values.pygame_clock.tick(values.Settings.fps)
     pygame.display.update()
-    globals.Values.screen.fill(globals.Theme.background_colour)
+    values.Values.screen.fill(values.Theme.background_colour)
 
 
 def main():

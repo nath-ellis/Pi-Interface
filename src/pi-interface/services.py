@@ -2,24 +2,24 @@
 For all the different services available.
 """
 import datetime
-import globals
+import values
 
 
 def manage_services():
     """
     Decides which services should be run.
     """
-    if globals.Services.clock_enabled:
+    if values.Services.clock_enabled:
         clock()
 
 
 def clock():
     """
-    Draws the clock service onto the screen using the configuration provided by globals.py
+    Draws the clock service onto the screen using the configuration provided by values.py
     """
-    current_time = datetime.datetime.now().strftime(globals.Services.clock_format)
+    current_time = datetime.datetime.now().strftime(values.Services.clock_format)
 
-    globals.Values.screen.blit(
-        globals.Theme.clock_font.render(current_time, True, globals.Theme.primary_colour),
-        (globals.Services.clock_x, globals.Services.clock_y)
+    values.Values.screen.blit(
+        values.Theme.clock_font.render(current_time, True, values.Theme.primary_colour),
+        (values.Services.clock_x, values.Services.clock_y)
     )
