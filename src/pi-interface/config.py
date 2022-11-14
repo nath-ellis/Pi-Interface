@@ -46,6 +46,9 @@ def init():
             elif k == "Services":  # Get service settings
                 try:
                     globals.Values.clock_enabled = bool(v["clock"])
+                    globals.Values.clock_format = v["clockFormat"]
+                    globals.Values.clock_x = int(v["clockX"])
+                    globals.Values.clock_y = int(v["clockY"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

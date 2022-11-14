@@ -10,10 +10,14 @@ Theme:
   # *.ttf files must be located in the fonts/ directory
   globalFontPath: "embodial.ttf"
   clockFontPath: "apollo.ttf"
-  clockFontSize: 30
+  clockFontSize: 100
 ---
 Services:
   clock: true
+  # Format of the clock: %d/%m/%Y %H:%M:%S
+  clockFormat: "%H:%M"
+  clockX: 10
+  clockY: 220
 ---
 Settings:
   fps: 30

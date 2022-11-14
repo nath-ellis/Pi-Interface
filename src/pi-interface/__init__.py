@@ -6,6 +6,7 @@ import pygame
 from pygame import *
 import config
 import globals
+import services
 
 
 def redraw():
@@ -15,6 +16,7 @@ def redraw():
     """
     globals.Values.pygame_clock.tick(globals.Values.fps)
     pygame.display.update()
+    globals.Values.screen.fill(globals.Values.background_colour)
 
 
 def main():
@@ -32,14 +34,7 @@ def main():
             if e.type == pygame.QUIT:
                 running = False
 
-        globals.Values.screen.blit(
-            globals.Values.global_font.render("Global Font", True, globals.Values.primary_colour),
-            (10, 10)
-        )
-        globals.Values.screen.blit(
-            globals.Values.clock_font.render("Clock Font", True, globals.Values.primary_colour),
-            (10, 100)
-        )
+        services.manage_services()
 
         redraw()
 

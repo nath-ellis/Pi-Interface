@@ -25,6 +25,9 @@ class Values:
 
     # Services
     clock_enabled = True
+    clock_format = "%H:%M"
+    clock_x = 10
+    clock_y = 220
 
     # Settings
     fps = 30
