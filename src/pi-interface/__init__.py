@@ -14,9 +14,9 @@ def redraw():
     Clears the window and redraws everything.
     Runs 30 times per second.
     """
-    globals.Values.pygame_clock.tick(globals.Values.fps)
+    globals.Values.pygame_clock.tick(globals.Settings.fps)
     pygame.display.update()
-    globals.Values.screen.fill(globals.Values.background_colour)
+    globals.Values.screen.fill(globals.Theme.background_colour)
 
 
 def main():

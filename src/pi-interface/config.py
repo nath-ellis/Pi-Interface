@@ -20,19 +20,19 @@ def init():
             if k == "Theme":  # Get the theme from the yaml
                 try:
                     # Colours
-                    globals.Values.primary_colour = eval(v["primary"])
-                    globals.Values.secondary_colour = eval(v["secondary"])
-                    globals.Values.background_colour = eval(v["background"])
+                    globals.Theme.primary_colour = eval(v["primary"])
+                    globals.Theme.secondary_colour = eval(v["secondary"])
+                    globals.Theme.background_colour = eval(v["background"])
 
                     # Fonts
                     if bool(v["useSameFont"]):
-                        globals.Values.clock_font = pygame.font.Font(
+                        globals.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
                                          v["globalFontPath"]),
                             int(v["clockFontSize"])
                         )
                     else:
-                        globals.Values.clock_font = pygame.font.Font(
+                        globals.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
                                          v["clockFontPath"]),
                             int(v["clockFontSize"])
@@ -45,10 +45,10 @@ def init():
                     print("Unknown Error: Failed to load theme configuration. Reverting to default values.")
             elif k == "Services":  # Get service settings
                 try:
-                    globals.Values.clock_enabled = bool(v["clock"])
-                    globals.Values.clock_format = v["clockFormat"]
-                    globals.Values.clock_x = int(v["clockX"])
-                    globals.Values.clock_y = int(v["clockY"])
+                    globals.Services.clock_enabled = bool(v["clock"])
+                    globals.Services.clock_format = v["clockFormat"]
+                    globals.Services.clock_x = int(v["clockX"])
+                    globals.Services.clock_y = int(v["clockY"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:
@@ -57,7 +57,7 @@ def init():
                     print("Unknown Error: Failed to load service configuration. Reverting to default values.")
             elif k == "Settings":  # Get application settings
                 try:
-                    globals.Values.fps = int(v["fps"])
+                    globals.Settings.fps = int(v["fps"])
                 except KeyError:
                     print("KeyError: Failed to load settings configuration. Reverting to default values.")
                 except NameError:
