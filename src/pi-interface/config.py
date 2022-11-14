@@ -16,10 +16,31 @@ def init():
     for c in config:  # Iterates over the yaml documents
         for k, v in c.items():  # Iterates over the items in the document
             if k == "Theme":  # Get the theme from the yaml
-                globals.Values.primary_colour = eval(v["primary"])
-                globals.Values.secondary_colour = eval(v["secondary"])
-                globals.Values.background_colour = eval(v["background"])
+                try:
+                    globals.Values.primary_colour = eval(v["primary"])
+                    globals.Values.secondary_colour = eval(v["secondary"])
+                    globals.Values.background_colour = eval(v["background"])
+                except KeyError:
+                    print("KeyError: Failed to load theme configuration. Reverting to default values.")
+                except NameError:
+                    print("NameError: Failed to load theme configuration. Reverting to default values.")
+                except:
+                    print("Unknown Error: Failed to load theme configuration. Reverting to default values.")
             elif k == "Services":  # Get service settings
-                pass
+                try:
+                    globals.Values.clock_enabled = bool(v["clock"])
+                except KeyError:
+                    print("KeyError: Failed to load service configuration. Reverting to default values.")
+                except NameError:
+                    print("NameError: Failed to load service configuration. Reverting to default values.")
+                except:
+                    print("Unknown Error: Failed to load service configuration. Reverting to default values.")
             elif k == "Settings":  # Get application settings
-                globals.Values.fps = int(v["fps"])
+                try:
+                    globals.Values.fps = int(v["fps"])
+                except KeyError:
+                    print("KeyError: Failed to load settings configuration. Reverting to default values.")
+                except NameError:
+                    print("NameError: Failed to load settings configuration. Reverting to default values.")
+                except:
+                    print("Unknown Error: Failed to load settings configuration. Reverting to default values.")

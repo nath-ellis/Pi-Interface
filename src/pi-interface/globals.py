@@ -17,5 +17,8 @@ class Values:
     secondary_colour = (98, 204, 141)
     background_colour = (0, 0, 0)
 
+    # Services
+    clock_enabled = True
+
     # Settings
     fps = 30
