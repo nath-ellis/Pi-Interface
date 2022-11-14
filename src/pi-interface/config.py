@@ -2,6 +2,8 @@
 For parsing the config.yaml file
 """
 
+import pygame
+import os.path
 import yaml
 import globals
 
@@ -17,9 +19,24 @@ def init():
         for k, v in c.items():  # Iterates over the items in the document
             if k == "Theme":  # Get the theme from the yaml
                 try:
+                    # Colours
                     globals.Values.primary_colour = eval(v["primary"])
                     globals.Values.secondary_colour = eval(v["secondary"])
                     globals.Values.background_colour = eval(v["background"])
+
+                    # Fonts
+                    if bool(v["useSameFont"]):
+                        globals.Values.clock_font = pygame.font.Font(
+                            os.path.join("../../fonts",
+                                         v["globalFontPath"]),
+                            int(v["clockFontSize"])
+                        )
+                    else:
+                        globals.Values.clock_font = pygame.font.Font(
+                            os.path.join("../../fonts",
+                                         v["clockFontPath"]),
+                            int(v["clockFontSize"])
+                        )
                 except KeyError:
                     print("KeyError: Failed to load theme configuration. Reverting to default values.")
                 except NameError:

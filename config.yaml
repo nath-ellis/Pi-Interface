@@ -4,6 +4,13 @@ Theme:
   primary: (108, 204, 98)
   secondary: (98, 204, 141)
   background: (0, 0, 0)
+  # If true the global font will be used for all services
+  useSameFont: false
+  # The name of the ttf font file you wish to use
+  # *.ttf files must be located in the fonts/ directory
+  globalFontPath: "embodial.ttf"
+  clockFontPath: "apollo.ttf"
+  clockFontSize: 30
 ---
 Services:
   clock: true

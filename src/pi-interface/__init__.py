@@ -32,6 +32,15 @@ def main():
             if e.type == pygame.QUIT:
                 running = False
 
+        globals.Values.screen.blit(
+            globals.Values.global_font.render("Global Font", True, globals.Values.primary_colour),
+            (10, 10)
+        )
+        globals.Values.screen.blit(
+            globals.Values.clock_font.render("Clock Font", True, globals.Values.primary_colour),
+            (10, 100)
+        )
+
         redraw()
 
 if __name__ == "__main__":
