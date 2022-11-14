@@ -7,4 +7,7 @@ Theme:
 ---
 Services:
   clock: true
+---
+Settings:
+  fps: 30
 ...

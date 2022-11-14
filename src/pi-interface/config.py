@@ -19,3 +19,7 @@ def init():
                 globals.Values.primary_colour = eval(v["primary"])
                 globals.Values.secondary_colour = eval(v["secondary"])
                 globals.Values.background_colour = eval(v["background"])
+            elif k == "Services":  # Get service settings
+                pass
+            elif k == "Settings":  # Get application settings
+                globals.Values.fps = int(v["fps"])
