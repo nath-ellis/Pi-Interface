@@ -16,6 +16,6 @@ def init():
     for c in config:  # Iterates over the yaml documents
         for k, v in c.items():  # Iterates over the items in the document
             if k == "Theme":  # Get the theme from the yaml
-                globals.primary_colour = eval(v["primary"])
-                globals.secondary_colour = eval(v["secondary"])
-                globals.background_colour = eval(v["background"])
+                globals.Values.primary_colour = eval(v["primary"])
+                globals.Values.secondary_colour = eval(v["secondary"])
+                globals.Values.background_colour = eval(v["background"])

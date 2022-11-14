@@ -5,11 +5,17 @@ For global variables which need to be accessed from multiple areas of the projec
 import pygame
 
 
-def init():
+class Values:
     """
-    Initialises the global variables
+    For global variables
     """
-    global clock, screen, primary_colour, secondary_colour, background_colour  # Global values
-
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((480, 320))
+
+    # Colours
+    primary_colour = (108, 204, 98)
+    secondary_colour = (98, 204, 141)
+    background_colour = (0, 0, 0)
+
+    # Settings
+    fps = 30
