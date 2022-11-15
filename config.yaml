@@ -13,6 +13,8 @@ Theme:
     globalFont: "embodial.ttf"
     clockFont: "apollo.ttf"
     clockFontSize: 100
+    deviceInfoFont: "embodial.ttf"
+    deviceInfoFontSize: 25
 ---
 Services:
   Clock:
@@ -21,6 +23,12 @@ Services:
     format: "%H:%M"
     x: 10
     y: 220
+  DeviceInfo:
+    enabled: true
+    # Space between each line
+    lineHeight: 30
+    x: 10
+    y: 10
 ---
 Settings:
   fps: 30

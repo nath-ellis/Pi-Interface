@@ -31,11 +31,23 @@ def init():
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
+
+                        values.Theme.device_info_font = pygame.font.Font(
+                            os.path.join("../../fonts",
+                                         v["Font"]["globalFont"]),
+                            int(v["Font"]["deviceInfoFontSize"])
+                        )
                     else:
                         values.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
                                          v["Font"]["clockFont"]),
                             int(v["Font"]["clockFontSize"])
+                        )
+
+                        values.Theme.device_info_font = pygame.font.Font(
+                            os.path.join("../../fonts",
+                                         v["Font"]["deviceInfoFont"]),
+                            int(v["Font"]["deviceInfoFontSize"])
                         )
                 except KeyError:
                     print("KeyError: Failed to load theme configuration. Reverting to default values.")
@@ -45,10 +57,17 @@ def init():
                     print("Unknown Error: Failed to load theme configuration. Reverting to default values.")
             elif k == "Services":  # Get service settings
                 try:
+                    # Clock
                     values.Services.clock_enabled = bool(v["Clock"]["enabled"])
                     values.Services.clock_format = v["Clock"]["format"]
                     values.Services.clock_x = int(v["Clock"]["x"])
                     values.Services.clock_y = int(v["Clock"]["y"])
+
+                    # Device Info
+                    values.Services.device_info_enabled = bool(v["DeviceInfo"]["enabled"])
+                    values.Services.device_info_line_height = int(v["DeviceInfo"]["lineHeight"])
+                    values.Services.device_info_x = int(v["DeviceInfo"]["x"])
+                    values.Services.device_info_y = int(v["DeviceInfo"]["y"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

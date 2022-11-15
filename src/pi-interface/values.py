@@ -27,6 +27,7 @@ class Theme:
     pygame.font.init()
     global_font = pygame.font.Font(os.path.join("../../fonts", "embodial.ttf"), 50)
     clock_font = pygame.font.Font(os.path.join("../../fonts", "apollo.ttf"), 50)
+    device_info_font = pygame.font.Font(os.path.join("../../fonts", "embodial.ttf"), 25)
 
 
 class Services:
@@ -38,6 +39,12 @@ class Services:
     clock_format = "%H:%M"
     clock_x = 10
     clock_y = 220
+
+    # Device Info
+    device_info_enabled = True
+    device_info_line_height = 30
+    device_info_x = 10
+    device_info_y = 10
 
 
 class Settings:
