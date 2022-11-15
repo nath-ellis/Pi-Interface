@@ -8,8 +8,8 @@ Theme:
   useSameFont: false
   # The name of the ttf font file you wish to use
   # *.ttf files must be located in the fonts/ directory
-  globalFontPath: "embodial.ttf"
-  clockFontPath: "apollo.ttf"
+  globalFont: "embodial.ttf"
+  clockFont: "apollo.ttf"
   clockFontSize: 100
 ---
 Services:

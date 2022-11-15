@@ -28,13 +28,13 @@ def init():
                     if bool(v["useSameFont"]):
                         values.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
-                                         v["globalFontPath"]),
+                                         v["globalFont"]),
                             int(v["clockFontSize"])
                         )
                     else:
                         values.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
-                                         v["clockFontPath"]),
+                                         v["clockFont"]),
                             int(v["clockFontSize"])
                         )
                 except KeyError:
