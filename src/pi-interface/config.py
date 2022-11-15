@@ -20,22 +20,22 @@ def init():
             if k == "Theme":  # Get the theme from the yaml
                 try:
                     # Colours
-                    values.Theme.primary_colour = eval(v["primary"])
-                    values.Theme.secondary_colour = eval(v["secondary"])
-                    values.Theme.background_colour = eval(v["background"])
+                    values.Theme.primary_colour = eval(v["Colours"]["primary"])
+                    values.Theme.secondary_colour = eval(v["Colours"]["secondary"])
+                    values.Theme.background_colour = eval(v["Colours"]["background"])
 
                     # Fonts
-                    if bool(v["useSameFont"]):
+                    if bool(v["Font"]["useGlobal"]):
                         values.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
-                                         v["globalFont"]),
-                            int(v["clockFontSize"])
+                                         v["Font"]["globalFont"]),
+                            int(v["Font"]["clockFontSize"])
                         )
                     else:
                         values.Theme.clock_font = pygame.font.Font(
                             os.path.join("../../fonts",
-                                         v["clockFont"]),
-                            int(v["clockFontSize"])
+                                         v["Font"]["clockFont"]),
+                            int(v["Font"]["clockFontSize"])
                         )
                 except KeyError:
                     print("KeyError: Failed to load theme configuration. Reverting to default values.")
@@ -45,10 +45,10 @@ def init():
                     print("Unknown Error: Failed to load theme configuration. Reverting to default values.")
             elif k == "Services":  # Get service settings
                 try:
-                    values.Services.clock_enabled = bool(v["clock"])
-                    values.Services.clock_format = v["clockFormat"]
-                    values.Services.clock_x = int(v["clockX"])
-                    values.Services.clock_y = int(v["clockY"])
+                    values.Services.clock_enabled = bool(v["Clock"]["enabled"])
+                    values.Services.clock_format = v["Clock"]["format"]
+                    values.Services.clock_x = int(v["Clock"]["x"])
+                    values.Services.clock_y = int(v["Clock"]["y"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

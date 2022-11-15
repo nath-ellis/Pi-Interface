@@ -1,23 +1,26 @@
 ---
 # Colours in (r, g, b) format
 Theme:
-  primary: (108, 204, 98)
-  secondary: (98, 204, 141)
-  background: (0, 0, 0)
-  # If true the global font will be used for all services
-  useSameFont: false
-  # The name of the ttf font file you wish to use
-  # *.ttf files must be located in the fonts/ directory
-  globalFont: "embodial.ttf"
-  clockFont: "apollo.ttf"
-  clockFontSize: 100
+  Colours:
+    primary: (108, 204, 98)
+    secondary: (98, 204, 141)
+    background: (0, 0, 0)
+  Font:
+    # If true the global font will be used for all services
+    useGlobal: false
+    # The name of the ttf font file you wish to use
+    # *.ttf files must be located in the fonts/ directory
+    globalFont: "embodial.ttf"
+    clockFont: "apollo.ttf"
+    clockFontSize: 100
 ---
 Services:
-  clock: true
-  # Format of the clock: %d/%m/%Y %H:%M:%S
-  clockFormat: "%H:%M"
-  clockX: 10
-  clockY: 220
+  Clock:
+    enabled: true
+    # Format of the clock: %d/%m/%Y %H:%M:%S
+    format: "%H:%M"
+    x: 10
+    y: 220
 ---
 Settings:
   fps: 30
