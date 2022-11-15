@@ -12,7 +12,7 @@ import services
 def redraw():
     """
     Clears the window and redraws everything.
-    Runs 30 times per second.
+    Runs a given amount of times per second using the fps value provided by config.yaml.
     """
     values.Values.pygame_clock.tick(values.Settings.fps)
     pygame.display.update()
