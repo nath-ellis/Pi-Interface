@@ -19,6 +19,15 @@ def init():
         for k, v in c.items():  # Iterates over the items in the document
             if k == "Theme":  # Get the theme from the yaml
                 try:
+                    # Background Image
+                    if v["backgroundImage"] != "":
+                        values.Theme.background_img = pygame.image.load(
+                            os.path.join(
+                                "../../assets/images",
+                                v["backgroundImage"]
+                            )
+                        )
+
                     # Colours
                     values.Theme.primary_colour = eval(v["Colours"]["primary"])
                     values.Theme.secondary_colour = eval(v["Colours"]["secondary"])

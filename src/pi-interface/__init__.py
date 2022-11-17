@@ -18,6 +18,9 @@ def redraw():
     pygame.display.update()
     values.Values.screen.fill(values.Theme.background_colour)
 
+    if values.Theme.background_img is not None:
+        values.Values.screen.blit(values.Theme.background_img, (0, 0))
+
 
 def main():
     """

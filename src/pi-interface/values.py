@@ -18,6 +18,9 @@ class Theme:
     """
     For global theme configuration
     """
+    # Background Image
+    background_img = None
+
     # Colours
     primary_colour = (108, 204, 98)
     secondary_colour = (98, 204, 141)
