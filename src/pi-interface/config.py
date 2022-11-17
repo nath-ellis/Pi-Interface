@@ -27,25 +27,25 @@ def init():
                     # Fonts
                     if bool(v["Font"]["useGlobal"]):
                         values.Theme.clock_font = pygame.font.Font(
-                            os.path.join("../../fonts",
+                            os.path.join("../../assets/fonts",
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
 
                         values.Theme.device_info_font = pygame.font.Font(
-                            os.path.join("../../fonts",
+                            os.path.join("../../assets/fonts",
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
                         )
                     else:
                         values.Theme.clock_font = pygame.font.Font(
-                            os.path.join("../../fonts",
+                            os.path.join("../../assets/fonts",
                                          v["Font"]["clockFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
 
                         values.Theme.device_info_font = pygame.font.Font(
-                            os.path.join("../../fonts",
+                            os.path.join("../../assets/fonts",
                                          v["Font"]["deviceInfoFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
                         )

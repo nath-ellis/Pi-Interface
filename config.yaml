@@ -9,7 +9,7 @@ Theme:
     # If true the global font will be used for all services
     useGlobal: false
     # The name of the ttf font file you wish to use
-    # *.ttf files must be located in the fonts/ directory
+    # *.ttf files must be located in the assets/fonts/ directory
     globalFont: "embodial.ttf"
     clockFont: "apollo.ttf"
     clockFontSize: 100
