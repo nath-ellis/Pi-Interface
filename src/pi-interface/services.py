@@ -4,7 +4,6 @@ For all the different services available.
 import datetime
 import platform
 import socket
-
 import GPUtil
 import psutil
 import values
