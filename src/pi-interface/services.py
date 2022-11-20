@@ -4,6 +4,9 @@ For all the different services available.
 import datetime
 import platform
 import socket
+
+import GPUtil
+import psutil
 import values
 
 
@@ -36,8 +39,12 @@ def device_info():
     """
     info = [
         socket.gethostname(),
+        platform.system() + " " + platform.machine(),
         socket.gethostbyname(socket.gethostname()),
-        platform.system() + " " + platform.machine()
+        str(round(psutil.cpu_percent(), 2)) + "% CPU Usage",
+        str(round(GPUtil.getGPUs()[0].load * 100, 2)) + "% GPU Usage",
+        str(round(psutil.virtual_memory().percent, 2)) + "% Memory Usage",
+        str(round(psutil.disk_usage("/").percent, 2)) + "% Disk Usage"
     ]
 
     # Draws the devices info onto the screen with the correct line height between it

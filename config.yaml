@@ -17,7 +17,7 @@ Theme:
     globalFont: "embodial.ttf"
     clockFont: "apollo.ttf"
     clockFontSize: 100
-    deviceInfoFont: "embodial.ttf"
+    deviceInfoFont: "apollo.ttf"
     deviceInfoFontSize: 25
 ---
 Services:
