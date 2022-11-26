@@ -49,6 +49,19 @@ class Services:
     device_info_x = 10
     device_info_y = 10
 
+    # Music
+    music_enabled = True
+    music_playing = False
+    playlist = []
+    music_btn_x = 390
+    music_btn_y = 220
+    play_icon = pygame.image.load(
+        os.path.join("../../assets/icons", "play.png")
+    )
+    pause_icon = pygame.image.load(
+        os.path.join("../../assets/icons", "pause.png")
+    )
+
 
 class Settings:
     """

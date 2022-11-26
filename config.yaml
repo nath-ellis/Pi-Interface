@@ -33,6 +33,21 @@ Services:
     lineHeight: 30
     x: 10
     y: 10
+  Music:
+    enabled: false
+    # Name of the icon located in assets/icons/
+    playIcon: "play.png"
+    pauseIcon: "pause.png"
+    btnX: 390
+    btnY: 220
+    # Name of music files located in assets/music/
+    # Plays in order from top to bottom
+    # Formats supported: all which are supported by pygame
+    playlist:
+      - "1.mp3"
+      - "2.mp3"
+      - "3.mp3"
+      - "4.mp3"
 ---
 Settings:
   fps: 30

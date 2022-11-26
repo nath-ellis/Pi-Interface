@@ -6,6 +6,7 @@ import platform
 import socket
 import GPUtil
 import psutil
+import pygame
 import values
 
 
@@ -18,6 +19,9 @@ def manage_services():
 
     if values.Services.device_info_enabled:
         device_info()
+
+    if values.Services.music_enabled:
+        draw_music()
 
 
 def clock():
@@ -53,3 +57,86 @@ def device_info():
             (values.Services.device_info_x, values.Services.device_info_y +
              (values.Services.device_info_line_height * info.index(i)))
         )
+
+
+def init_music():
+    """
+    Initialises the playlist for the music service
+    """
+    pygame.mixer.music.set_endevent(pygame.USEREVENT+1)  # Sets an event which will run when a song ends
+
+    try:
+        pygame.mixer.music.load(values.Services.playlist[0])
+    except pygame.error:
+        print("pygame.error: Failed to load music. Disabling service.")
+        values.Services.music_enabled = False
+    except:
+        print("Unknown error: Failed to load music. Disabling service.")
+        values.Services.music_enabled = False
+
+    # Moves the song to the end of the playlist
+    values.Services.playlist.append(values.Services.playlist[0])
+    values.Services.playlist.pop(0)
+
+
+def draw_music():
+    """
+    Draws the music service
+    """
+    # Draw pause button when playing
+    if pygame.mixer.music.get_busy():
+        values.Values.screen.blit(
+            values.Services.pause_icon,
+            (values.Services.music_btn_x, values.Services.music_btn_y)
+        )
+    else:  # Draw play button when paused or not playing
+        values.Values.screen.blit(
+            values.Services.play_icon,
+            (values.Services.music_btn_x, values.Services.music_btn_y)
+        )
+
+
+def manage_music(e):
+    """
+    For managing the music service
+    :param e: pygame event
+    """
+    if e.type == pygame.MOUSEBUTTONDOWN:
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        # Input for the music service
+        if values.Services.music_enabled:
+            btn_x = values.Services.music_btn_x
+            btn_y = values.Services.music_btn_y
+            width = values.Services.play_icon.get_width()
+            height = values.Services.play_icon.get_height()
+
+            # Assumes the play button and pause button are the same size
+            if btn_x < mouse_x < btn_x + width and \
+                    btn_y < mouse_y < btn_y + height:
+                # If music is playing, pause it
+                if pygame.mixer.music.get_busy():
+                    pygame.mixer.music.pause()
+                else:
+                    # If music is not playing but has been started
+                    if values.Services.music_playing:
+                        pygame.mixer.music.unpause()
+                    else:  # If music has not been started
+                        pygame.mixer.music.play()
+                        values.Services.music_playing = True
+
+    # When music ends
+    if e.type == pygame.mixer.music.get_endevent():
+        try:
+            pygame.mixer.music.load(values.Services.playlist[0])  # Loads the next song
+            pygame.mixer.music.play()  # Plays it
+            # Moves the song to the end of the playlist
+            values.Services.playlist.append(values.Services.playlist[0])
+            values.Services.playlist.pop(0)
+        except pygame.error:
+            print("pygame.error: Failed to load music. Disabling service.")
+            values.Services.music_enabled = False
+        except:
+            print("Unknown error: Failed to load music. Disabling service.")
+            values.Services.music_enabled = False
+

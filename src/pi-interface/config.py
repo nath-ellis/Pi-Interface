@@ -77,6 +77,21 @@ def init():
                     values.Services.device_info_line_height = int(v["DeviceInfo"]["lineHeight"])
                     values.Services.device_info_x = int(v["DeviceInfo"]["x"])
                     values.Services.device_info_y = int(v["DeviceInfo"]["y"])
+
+                    # Music
+                    values.Services.music_enabled = bool(v["Music"]["enabled"])
+                    for p in v["Music"]["playlist"]:
+                        values.Services.playlist.append(
+                            os.path.join("../../assets/music", p)
+                        )
+                    values.Services.play_icon = pygame.image.load(
+                        os.path.join("../../assets/icons", v["Music"]["playIcon"])
+                    )
+                    values.Services.music_btn_x = int(v["Music"]["btnX"])
+                    values.Services.music_btn_y = int(v["Music"]["btnY"])
+                    values.Services.pause_icon = pygame.image.load(
+                        os.path.join("../../assets/icons", v["Music"]["pauseIcon"])
+                    )
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

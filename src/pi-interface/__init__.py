@@ -30,12 +30,17 @@ def main():
     config.init()
     pygame.display.set_caption("Pi Interface")
 
+    if values.Services.music_enabled:
+        services.init_music()
+
     running = True
 
     while running:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 running = False
+
+            services.manage_music(e)
 
         services.manage_services()
 
