@@ -43,7 +43,6 @@ def device_info():
     info = [
         socket.gethostname(),
         platform.system() + " " + platform.machine(),
-        socket.gethostbyname(socket.gethostname()),
         str(round(psutil.cpu_percent(), 2)) + "% CPU Usage",
         str(round(GPUtil.getGPUs()[0].load * 100, 2)) + "% GPU Usage",
         str(round(psutil.virtual_memory().percent, 2)) + "% Memory Usage",
