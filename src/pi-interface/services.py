@@ -138,4 +138,3 @@ def manage_music(e):
         except:
             print("Unknown error: Failed to load music. Disabling service.")
             values.Services.music_enabled = False
-
