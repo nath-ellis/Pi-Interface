@@ -2,6 +2,7 @@
 For all the different services available.
 """
 import datetime
+import os.path
 import platform
 import socket
 import GPUtil
@@ -22,6 +23,9 @@ def manage_services():
 
     if values.Services.music_enabled:
         draw_music()
+
+    if values.Services.games_enabled:
+        games_menu()
 
 
 def clock():
@@ -138,3 +142,47 @@ def manage_music(e):
         except:
             print("Unknown error: Failed to load music. Disabling service.")
             values.Services.music_enabled = False
+
+
+def games_menu():
+    """
+    Either draws the button to open the game menu or draws the game menu
+    """
+    if values.Services.games_menu_open:
+        values.Values.screen.fill(values.Theme.background_colour)
+        values.Values.screen.blit(values.Services.games_menu_cross,
+                                  (values.Services.games_menu_cross_x, values.Services.games_menu_cross_y))
+
+        for g in values.Services.games_menu_items:
+            g.draw()
+    else:
+        values.Values.screen.blit(
+            values.Services.games_menu_btn,
+            (values.Services.games_menu_btn_x, values.Services.games_menu_btn_y)
+        )
+
+def manage_games_menu(e):
+    """
+    Check if a game menu item is pressed.
+    """
+    if values.Services.games_menu_open:
+        for g in values.Services.games_menu_items:
+            g.is_pressed(e)
+
+        if e.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+
+            if values.Services.games_menu_cross_x < mouse_x < values.Services.games_menu_cross_x + \
+                    values.Services.games_menu_cross.get_width() and \
+                    values.Services.games_menu_cross_y < mouse_y < values.Services.games_menu_cross_y + \
+                    values.Services.games_menu_cross.get_height():
+                values.Services.games_menu_open = False
+
+    if e.type == pygame.MOUSEBUTTONDOWN:
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        if values.Services.games_menu_btn_x < mouse_x < values.Services.games_menu_btn_x + \
+                values.Services.games_menu_btn.get_width() and \
+                values.Services.games_menu_btn_y < mouse_y < values.Services.games_menu_btn_y + \
+                values.Services.games_menu_btn.get_height():
+            values.Services.games_menu_open = True

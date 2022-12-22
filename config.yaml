@@ -48,6 +48,15 @@ Services:
       - "2.mp3"
       - "3.mp3"
       - "4.mp3"
+  Games:
+    enabled: true
+    # Name of the icon located in assets/icons/
+    icon: "games.png"
+    iconX: 438
+    iconY: 10
+    crossIcon: "cross.png"
+    crossX: 10
+    crossY: 10
 ---
 Settings:
   fps: 30

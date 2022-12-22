@@ -92,6 +92,19 @@ def init():
                     values.Services.pause_icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["pauseIcon"])
                     )
+
+                    # Games
+                    values.Services.games_enabled = bool(v["Games"]["enabled"])
+                    values.Services.games_menu_btn = pygame.image.load(
+                        os.path.join("../../assets/icons", v["Games"]["icon"])
+                    )
+                    values.Services.games_menu_btn_x = int(v["Games"]["iconX"])
+                    values.Services.games_menu_btn_y = int(v["Games"]["iconY"])
+                    values.Services.games_menu_cross = pygame.image.load(
+                        os.path.join("../../assets/icons", v["Games"]["crossIcon"])
+                    )
+                    values.Services.games_menu_cross_x = int(v["Games"]["crossX"])
+                    values.Services.games_menu_cross_y = int(v["Games"]["crossY"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

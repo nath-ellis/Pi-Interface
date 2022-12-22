@@ -41,6 +41,7 @@ def main():
                 running = False
 
             services.manage_music(e)
+            services.manage_games_menu(e)
 
         services.manage_services()
 
