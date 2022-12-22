@@ -5,8 +5,7 @@ __init__.py
 from pygame import *
 import config
 from values import *
-import services
-
+from services import services
 
 def redraw():
     """
@@ -29,8 +28,8 @@ def main():
     config.init()
     pygame.display.set_caption("Pi Interface")
 
-    if Services.music_enabled:
-        services.init_music()
+    if services.music.enabled:
+        services.music.init_playlist()
 
     running = True
 
@@ -39,10 +38,10 @@ def main():
             if e.type == pygame.QUIT:
                 running = False
 
-            services.manage_music(e)
-            services.manage_games_menu(e)
+            services.music.manage(e)
+            services.games.manage_menu(e)
 
-        services.manage_services()
+        services.manage()
 
         redraw()
 

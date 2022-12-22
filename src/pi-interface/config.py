@@ -5,6 +5,7 @@ For parsing the config.yaml file
 import os.path
 import yaml
 from values import *
+from services import services
 
 
 def init():
@@ -66,44 +67,44 @@ def init():
             elif k == "Services":  # Get service settings
                 try:
                     # Clock
-                    Services.clock_enabled = bool(v["Clock"]["enabled"])
-                    Services.clock_format = v["Clock"]["format"]
-                    Services.clock_x = int(v["Clock"]["x"])
-                    Services.clock_y = int(v["Clock"]["y"])
+                    services.clock.enabled = bool(v["Clock"]["enabled"])
+                    services.clock.format = v["Clock"]["format"]
+                    services.clock.x = int(v["Clock"]["x"])
+                    services.clock.y = int(v["Clock"]["y"])
 
                     # Device Info
-                    Services.device_info_enabled = bool(v["DeviceInfo"]["enabled"])
-                    Services.device_info_line_height = int(v["DeviceInfo"]["lineHeight"])
-                    Services.device_info_x = int(v["DeviceInfo"]["x"])
-                    Services.device_info_y = int(v["DeviceInfo"]["y"])
+                    services.device_info.enabled = bool(v["DeviceInfo"]["enabled"])
+                    services.device_info.line_height = int(v["DeviceInfo"]["lineHeight"])
+                    services.device_info.x = int(v["DeviceInfo"]["x"])
+                    services.device_info.y = int(v["DeviceInfo"]["y"])
 
                     # Music
-                    Services.music_enabled = bool(v["Music"]["enabled"])
+                    services.music.enabled = bool(v["Music"]["enabled"])
                     for p in v["Music"]["playlist"]:
-                        Services.playlist.append(
+                        services.music.playlist.append(
                             os.path.join("../../assets/music", p)
                         )
-                    Services.play_icon = pygame.image.load(
+                    services.music.play_icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["playIcon"])
                     )
-                    Services.music_btn_x = int(v["Music"]["btnX"])
-                    Services.music_btn_y = int(v["Music"]["btnY"])
-                    Services.pause_icon = pygame.image.load(
+                    services.music.x = int(v["Music"]["btnX"])
+                    services.music.y = int(v["Music"]["btnY"])
+                    services.music.pause_icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["pauseIcon"])
                     )
-
+#
                     # Games
-                    Services.games_enabled = bool(v["Games"]["enabled"])
-                    Services.games_menu_btn = pygame.image.load(
+                    services.games.enabled = bool(v["Games"]["enabled"])
+                    services.games.btn = pygame.image.load(
                         os.path.join("../../assets/icons", v["Games"]["icon"])
                     )
-                    Services.games_menu_btn_x = int(v["Games"]["iconX"])
-                    Services.games_menu_btn_y = int(v["Games"]["iconY"])
-                    Services.games_menu_cross = pygame.image.load(
+                    services.games.btn_x = int(v["Games"]["iconX"])
+                    services.games.btn_y = int(v["Games"]["iconY"])
+                    services.games.cross = pygame.image.load(
                         os.path.join("../../assets/icons", v["Games"]["crossIcon"])
                     )
-                    Services.games_menu_cross_x = int(v["Games"]["crossX"])
-                    Services.games_menu_cross_y = int(v["Games"]["crossY"])
+                    services.games.cross_x = int(v["Games"]["crossX"])
+                    services.games.cross_y = int(v["Games"]["crossY"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:
