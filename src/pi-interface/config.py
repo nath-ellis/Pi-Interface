@@ -84,27 +84,29 @@ def init():
                         services.music.playlist.append(
                             os.path.join("../../assets/music", p)
                         )
-                    services.music.play_icon = pygame.image.load(
+                    services.music.play_btn.x = int(v["Music"]["btnX"])
+                    services.music.play_btn.y = int(v["Music"]["btnY"])
+                    services.music.play_btn.icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["playIcon"])
                     )
-                    services.music.x = int(v["Music"]["btnX"])
-                    services.music.y = int(v["Music"]["btnY"])
-                    services.music.pause_icon = pygame.image.load(
+                    services.music.pause_btn.x = int(v["Music"]["btnX"])
+                    services.music.pause_btn.y = int(v["Music"]["btnY"])
+                    services.music.pause_btn.icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["pauseIcon"])
                     )
-#
+
                     # Games
                     services.games.enabled = bool(v["Games"]["enabled"])
-                    services.games.btn = pygame.image.load(
+                    services.games.open_btn.x = int(v["Games"]["iconX"])
+                    services.games.open_btn.y = int(v["Games"]["iconY"])
+                    services.games.open_btn.icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Games"]["icon"])
                     )
-                    services.games.btn_x = int(v["Games"]["iconX"])
-                    services.games.btn_y = int(v["Games"]["iconY"])
-                    services.games.cross = pygame.image.load(
+                    services.games.close_btn.x = int(v["Games"]["crossX"])
+                    services.games.close_btn.y = int(v["Games"]["crossY"])
+                    services.games.close_btn.icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Games"]["crossIcon"])
                     )
-                    services.games.cross_x = int(v["Games"]["crossX"])
-                    services.games.cross_y = int(v["Games"]["crossY"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:
