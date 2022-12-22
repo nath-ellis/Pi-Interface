@@ -2,10 +2,9 @@
 __init__.py
 """
 
-import pygame
 from pygame import *
 import config
-import values
+from values import *
 import services
 
 
@@ -14,12 +13,12 @@ def redraw():
     Clears the window and redraws everything.
     Runs a given amount of times per second using the fps value provided by config.yaml.
     """
-    values.Values.pygame_clock.tick(values.Settings.fps)
+    Values.pygame_clock.tick(Settings.fps)
     pygame.display.update()
-    values.Values.screen.fill(values.Theme.background_colour)
+    Values.screen.fill(Theme.background_colour)
 
-    if values.Theme.background_img is not None:
-        values.Values.screen.blit(values.Theme.background_img, (0, 0))
+    if Theme.background_img is not None:
+        Values.screen.blit(Theme.background_img, (0, 0))
 
 
 def main():
@@ -30,7 +29,7 @@ def main():
     config.init()
     pygame.display.set_caption("Pi Interface")
 
-    if values.Services.music_enabled:
+    if Services.music_enabled:
         services.init_music()
 
     running = True

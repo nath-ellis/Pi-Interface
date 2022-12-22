@@ -2,10 +2,9 @@
 For parsing the config.yaml file
 """
 
-import pygame
 import os.path
 import yaml
-import values
+from values import *
 
 
 def init():
@@ -21,7 +20,7 @@ def init():
                 try:
                     # Background Image
                     if v["backgroundImage"] != "":
-                        values.Theme.background_img = pygame.image.load(
+                        Theme.background_img = pygame.image.load(
                             os.path.join(
                                 "../../assets/images",
                                 v["backgroundImage"]
@@ -29,31 +28,31 @@ def init():
                         )
 
                     # Colours
-                    values.Theme.primary_colour = eval(v["Colours"]["primary"])
-                    values.Theme.secondary_colour = eval(v["Colours"]["secondary"])
-                    values.Theme.background_colour = eval(v["Colours"]["background"])
+                    Theme.primary_colour = eval(v["Colours"]["primary"])
+                    Theme.secondary_colour = eval(v["Colours"]["secondary"])
+                    Theme.background_colour = eval(v["Colours"]["background"])
 
                     # Fonts
                     if bool(v["Font"]["useGlobal"]):
-                        values.Theme.clock_font = pygame.font.Font(
+                        Theme.clock_font = pygame.font.Font(
                             os.path.join("../../assets/fonts",
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
 
-                        values.Theme.device_info_font = pygame.font.Font(
+                        Theme.device_info_font = pygame.font.Font(
                             os.path.join("../../assets/fonts",
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
                         )
                     else:
-                        values.Theme.clock_font = pygame.font.Font(
+                        Theme.clock_font = pygame.font.Font(
                             os.path.join("../../assets/fonts",
                                          v["Font"]["clockFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
 
-                        values.Theme.device_info_font = pygame.font.Font(
+                        Theme.device_info_font = pygame.font.Font(
                             os.path.join("../../assets/fonts",
                                          v["Font"]["deviceInfoFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
@@ -67,44 +66,44 @@ def init():
             elif k == "Services":  # Get service settings
                 try:
                     # Clock
-                    values.Services.clock_enabled = bool(v["Clock"]["enabled"])
-                    values.Services.clock_format = v["Clock"]["format"]
-                    values.Services.clock_x = int(v["Clock"]["x"])
-                    values.Services.clock_y = int(v["Clock"]["y"])
+                    Services.clock_enabled = bool(v["Clock"]["enabled"])
+                    Services.clock_format = v["Clock"]["format"]
+                    Services.clock_x = int(v["Clock"]["x"])
+                    Services.clock_y = int(v["Clock"]["y"])
 
                     # Device Info
-                    values.Services.device_info_enabled = bool(v["DeviceInfo"]["enabled"])
-                    values.Services.device_info_line_height = int(v["DeviceInfo"]["lineHeight"])
-                    values.Services.device_info_x = int(v["DeviceInfo"]["x"])
-                    values.Services.device_info_y = int(v["DeviceInfo"]["y"])
+                    Services.device_info_enabled = bool(v["DeviceInfo"]["enabled"])
+                    Services.device_info_line_height = int(v["DeviceInfo"]["lineHeight"])
+                    Services.device_info_x = int(v["DeviceInfo"]["x"])
+                    Services.device_info_y = int(v["DeviceInfo"]["y"])
 
                     # Music
-                    values.Services.music_enabled = bool(v["Music"]["enabled"])
+                    Services.music_enabled = bool(v["Music"]["enabled"])
                     for p in v["Music"]["playlist"]:
-                        values.Services.playlist.append(
+                        Services.playlist.append(
                             os.path.join("../../assets/music", p)
                         )
-                    values.Services.play_icon = pygame.image.load(
+                    Services.play_icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["playIcon"])
                     )
-                    values.Services.music_btn_x = int(v["Music"]["btnX"])
-                    values.Services.music_btn_y = int(v["Music"]["btnY"])
-                    values.Services.pause_icon = pygame.image.load(
+                    Services.music_btn_x = int(v["Music"]["btnX"])
+                    Services.music_btn_y = int(v["Music"]["btnY"])
+                    Services.pause_icon = pygame.image.load(
                         os.path.join("../../assets/icons", v["Music"]["pauseIcon"])
                     )
 
                     # Games
-                    values.Services.games_enabled = bool(v["Games"]["enabled"])
-                    values.Services.games_menu_btn = pygame.image.load(
+                    Services.games_enabled = bool(v["Games"]["enabled"])
+                    Services.games_menu_btn = pygame.image.load(
                         os.path.join("../../assets/icons", v["Games"]["icon"])
                     )
-                    values.Services.games_menu_btn_x = int(v["Games"]["iconX"])
-                    values.Services.games_menu_btn_y = int(v["Games"]["iconY"])
-                    values.Services.games_menu_cross = pygame.image.load(
+                    Services.games_menu_btn_x = int(v["Games"]["iconX"])
+                    Services.games_menu_btn_y = int(v["Games"]["iconY"])
+                    Services.games_menu_cross = pygame.image.load(
                         os.path.join("../../assets/icons", v["Games"]["crossIcon"])
                     )
-                    values.Services.games_menu_cross_x = int(v["Games"]["crossX"])
-                    values.Services.games_menu_cross_y = int(v["Games"]["crossY"])
+                    Services.games_menu_cross_x = int(v["Games"]["crossX"])
+                    Services.games_menu_cross_y = int(v["Games"]["crossY"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:
@@ -113,7 +112,7 @@ def init():
                     print("Unknown Error: Failed to load service configuration. Reverting to default values.")
             elif k == "Settings":  # Get application settings
                 try:
-                    values.Settings.fps = int(v["fps"])
+                    Settings.fps = int(v["fps"])
                 except KeyError:
                     print("KeyError: Failed to load settings configuration. Reverting to default values.")
                 except NameError:
