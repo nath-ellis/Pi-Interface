@@ -1,5 +1,5 @@
 """
-__init__.py
+__main__.py
 """
 
 import os
