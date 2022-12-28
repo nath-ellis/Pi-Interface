@@ -19,7 +19,7 @@ class Button:
         self.x = x
         self.y = y
         self.icon = pygame.image.load(
-            os.path.join("../../assets/icons", icon)
+            os.path.join("../assets/icons", icon)
         )
 
 

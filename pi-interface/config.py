@@ -13,7 +13,7 @@ def init():
     Parses the config.yaml file and gets the values provided
     """
 
-    config = yaml.load_all(open("../../config.yaml"), Loader=yaml.FullLoader)  # Load the full file
+    config = yaml.load_all(open("../config.yaml"), Loader=yaml.FullLoader)  # Load the full file
 
     for c in config:  # Iterates over the yaml documents
         for k, v in c.items():  # Iterates over the items in the document
@@ -23,7 +23,7 @@ def init():
                     if v["backgroundImage"] != "":
                         Theme.background_img = pygame.image.load(
                             os.path.join(
-                                "../../assets/images",
+                                "../assets/images",
                                 v["backgroundImage"]
                             )
                         )
@@ -36,25 +36,25 @@ def init():
                     # Fonts
                     if bool(v["Font"]["useGlobal"]):
                         Theme.clock_font = pygame.font.Font(
-                            os.path.join("../../assets/fonts",
+                            os.path.join("../assets/fonts",
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
 
                         Theme.device_info_font = pygame.font.Font(
-                            os.path.join("../../assets/fonts",
+                            os.path.join("../assets/fonts",
                                          v["Font"]["globalFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
                         )
                     else:
                         Theme.clock_font = pygame.font.Font(
-                            os.path.join("../../assets/fonts",
+                            os.path.join("../assets/fonts",
                                          v["Font"]["clockFont"]),
                             int(v["Font"]["clockFontSize"])
                         )
 
                         Theme.device_info_font = pygame.font.Font(
-                            os.path.join("../../assets/fonts",
+                            os.path.join("../assets/fonts",
                                          v["Font"]["deviceInfoFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
                         )
@@ -71,7 +71,7 @@ def init():
                     services.exit.btn.x = int(v["ExitBtn"]["x"])
                     services.exit.btn.y = int(v["ExitBtn"]["y"])
                     services.exit.btn.icon = pygame.image.load(
-                        os.path.join("../../assets/icons", v["ExitBtn"]["icon"])
+                        os.path.join("../assets/icons", v["ExitBtn"]["icon"])
                     )
 
                     # Clock
@@ -90,17 +90,17 @@ def init():
                     services.music.enabled = bool(v["Music"]["enabled"])
                     for p in v["Music"]["playlist"]:
                         services.music.playlist.append(
-                            os.path.join("../../assets/music", p)
+                            os.path.join("../assets/music", p)
                         )
                     services.music.play_btn.x = int(v["Music"]["btnX"])
                     services.music.play_btn.y = int(v["Music"]["btnY"])
                     services.music.play_btn.icon = pygame.image.load(
-                        os.path.join("../../assets/icons", v["Music"]["playIcon"])
+                        os.path.join("../assets/icons", v["Music"]["playIcon"])
                     )
                     services.music.pause_btn.x = int(v["Music"]["btnX"])
                     services.music.pause_btn.y = int(v["Music"]["btnY"])
                     services.music.pause_btn.icon = pygame.image.load(
-                        os.path.join("../../assets/icons", v["Music"]["pauseIcon"])
+                        os.path.join("../assets/icons", v["Music"]["pauseIcon"])
                     )
 
                     # Games
@@ -108,12 +108,12 @@ def init():
                     services.games.open_btn.x = int(v["Games"]["iconX"])
                     services.games.open_btn.y = int(v["Games"]["iconY"])
                     services.games.open_btn.icon = pygame.image.load(
-                        os.path.join("../../assets/icons", v["Games"]["icon"])
+                        os.path.join("../assets/icons", v["Games"]["icon"])
                     )
                     services.games.close_btn.x = int(v["Games"]["crossX"])
                     services.games.close_btn.y = int(v["Games"]["crossY"])
                     services.games.close_btn.icon = pygame.image.load(
-                        os.path.join("../../assets/icons", v["Games"]["crossIcon"])
+                        os.path.join("../assets/icons", v["Games"]["crossIcon"])
                     )
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")

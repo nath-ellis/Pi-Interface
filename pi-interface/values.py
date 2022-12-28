@@ -29,9 +29,9 @@ class Theme:
 
     # Fonts
     pygame.font.init()
-    global_font = pygame.font.Font(os.path.join("../../assets/fonts", "embodial.ttf"), 50)
-    clock_font = pygame.font.Font(os.path.join("../../assets/fonts", "apollo.ttf"), 50)
-    device_info_font = pygame.font.Font(os.path.join("../../assets/fonts", "embodial.ttf"), 25)
+    global_font = pygame.font.Font(os.path.join("../assets/fonts", "embodial.ttf"), 50)
+    clock_font = pygame.font.Font(os.path.join("../assets/fonts", "apollo.ttf"), 50)
+    device_info_font = pygame.font.Font(os.path.join("../assets/fonts", "embodial.ttf"), 25)
 
 
 class Settings:
