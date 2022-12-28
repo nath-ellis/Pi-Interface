@@ -21,6 +21,12 @@ Theme:
     deviceInfoFontSize: 25
 ---
 Services:
+  ExitBtn:
+    enabled: true
+    x: 440
+    y: 54
+    # Name of icon located in assets/icons/
+    icon: "exit.png"
   Clock:
     enabled: true
     # Format of the clock: %d/%m/%Y %H:%M:%S

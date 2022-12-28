@@ -31,13 +31,12 @@ def main():
     if services.music.enabled:
         services.music.init_playlist()
 
-    running = True
-
-    while running:
+    while Values.running:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
-                running = False
+                Values.running = False
 
+            services.exit.manage(e)
             services.music.manage(e)
             services.games.manage_menu(e)
 

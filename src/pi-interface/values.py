@@ -12,6 +12,7 @@ class Values:
     """
     pygame_clock = pygame.time.Clock()
     screen = pygame.display.set_mode((480, 320))
+    running = True
 
 
 class Theme:

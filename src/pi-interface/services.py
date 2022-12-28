@@ -51,6 +51,36 @@ class Button:
         )
 
 
+class Exit:
+    """
+    The Exit Button Service
+    """
+
+
+    def __init__(self, x, y):
+        self.enabled = True
+        self.btn = Button(x, y, "exit.png")
+
+
+    def draw(self):
+        """
+        Draws the button
+        """
+
+        self.btn.draw()
+
+
+    def manage(self, e):
+        """
+        If the button is pressed
+        :param e: pygame event
+        """
+
+        if self.btn.is_pressed(e):
+            Values.running = False
+
+
+
 class Clock:
     """
     The Clock Service
@@ -276,6 +306,7 @@ class Services:
 
 
     def __init__(self):
+        self.exit = Exit(440, 54)
         self.clock = Clock(10, 220, "%H:%M")
         self.device_info = DeviceInfo(10, 10 , 30)
         self.music = Music(390, 220)
@@ -286,6 +317,9 @@ class Services:
         """
         Decides which services should be run
         """
+
+        if self.exit.enabled:
+            self.exit.draw()
 
         if self.clock.enabled:
             self.clock.update()

@@ -66,6 +66,14 @@ def init():
                     print("Unknown Error: Failed to load theme configuration. Reverting to default values.")
             elif k == "Services":  # Get service settings
                 try:
+                    # Exit
+                    services.exit.enabled = bool(v["ExitBtn"]["enabled"])
+                    services.exit.btn.x = int(v["ExitBtn"]["x"])
+                    services.exit.btn.y = int(v["ExitBtn"]["y"])
+                    services.exit.btn.icon = pygame.image.load(
+                        os.path.join("../../assets/icons", v["ExitBtn"]["icon"])
+                    )
+
                     # Clock
                     services.clock.enabled = bool(v["Clock"]["enabled"])
                     services.clock.format = v["Clock"]["format"]
