@@ -2,6 +2,14 @@
 __init__.py
 """
 
+import os
+
+os.chdir(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
+
 from pygame import *
 import config
 from values import *
