@@ -36,9 +36,14 @@ def main():
             if e.type == pygame.QUIT:
                 Values.running = False
 
-            services.exit.manage(e)
-            services.music.manage(e)
-            services.games.manage_menu(e)
+            if services.exit.enabled:
+                services.exit.manage(e)
+
+            if services.music.enabled:
+                services.music.manage(e)
+
+            if services.games.enabled:
+                services.games.manage_menu(e)
 
         services.manage()
 
