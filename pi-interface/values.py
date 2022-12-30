@@ -22,6 +22,12 @@ class Theme:
     # Background Image
     background_img = None
 
+    # Fullscreen
+    fullscreen = True
+
+    # Mouse Cursor Visibility
+    mouse_cursor_visible = False
+
     # Colours
     primary_colour = (108, 204, 98)
     secondary_colour = (98, 204, 141)

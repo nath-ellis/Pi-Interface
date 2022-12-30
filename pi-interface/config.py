@@ -28,6 +28,12 @@ def init():
                             )
                         )
 
+                    # Fullscreen
+                    Theme.fullscreen = bool(v["fullscreen"])
+
+                    # Mouse Cursor Visibility
+                    Theme.mouse_cursor_visible = bool(v["mouseCursorVisible"])
+
                     # Colours
                     Theme.primary_colour = eval(v["Colours"]["primary"])
                     Theme.secondary_colour = eval(v["Colours"]["secondary"])

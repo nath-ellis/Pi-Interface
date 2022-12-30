@@ -36,6 +36,13 @@ def main():
     config.init()
     pygame.display.set_caption("Pi Interface")
 
+    if Theme.fullscreen:
+        pygame.display.set_mode((0, 0), FULLSCREEN)
+
+    if not Theme.mouse_cursor_visible:
+        # Makes cursor invisible
+        pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+
     if services.music.enabled:
         services.music.init_playlist()
 

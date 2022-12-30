@@ -4,6 +4,8 @@ Theme:
   # Must be located in the assets/images/ directory
   # Set to "" to have the background colour as the background instead
   backgroundImage: ""
+  fullscreen: true
+  mouseCursorVisible: false
   # Colours in (r, g, b) format
   Colours:
     primary: (108, 204, 98)
