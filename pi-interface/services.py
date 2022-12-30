@@ -5,6 +5,8 @@ import datetime
 import platform
 import socket
 import psutil
+import games
+import config
 from values import *
 
 
@@ -247,9 +249,10 @@ class GamesMenuItem (Button):
     An item on the game menu
     """
 
-    def __init__(self, x, y, icon, name):
+    def __init__(self, x, y, icon, name, game_class):
         super().__init__(x, y, icon)
         self.name = name
+        self.game = game_class
 
 
 class Games:
@@ -263,10 +266,13 @@ class Games:
         self.menu_open = False
         self.open_btn = Button(btn_x, btn_y, "games.png")
         self.close_btn = Button(cross_x, cross_y, "cross.png")
-        self.menu_items = []
+        self.menu_items = [
+            GamesMenuItem(36, 36, "games/flappy_bird.png", "Flappy Bird", games.FlappyBird())
+        ]
+        self.game_running = None
 
 
-    def menu(self):
+    def draw_ui(self):
         """
         Either draws the button to open the game menu or draws the game menu
         """
@@ -277,26 +283,60 @@ class Games:
 
             for m in self.menu_items:
                 m.draw()
+        elif self.game_running is not None:  # If there is a game running
+            self.close_btn.draw()
         else:
             self.open_btn.draw()
 
 
-    def manage_menu(self, e):
+    def manage_controls(self, e):
         """
         Check if a game menu item is pressed.
         :param e: pygame event
         """
 
         if self.menu_open:
-            for g in self.menu_items:
-                if g.is_pressed(e):
-                    print(g.name)  # Launch game
+            for m in self.menu_items:
+                if m.is_pressed(e):
+                    # Disable services
+                    services.exit.enabled = False
+                    services.clock.enabled = False
+                    services.device_info.enabled = False
+                    services.music.enabled = False
 
+                    # Close menu and run game
+                    self.game_running = m.name
+                    self.menu_open = False
+
+            # Closes menu
             if self.close_btn.is_pressed(e):
+                config.init()  # Reset the config as all services are disabled while the game is run
                 self.menu_open = False
+        elif self.game_running is not None:  # If there is a game running
+            if self.close_btn.is_pressed(e):
+                for m in self.menu_items:
+                    if self.game_running == m.name:
+                        m.game.reset()  # Resets the game if the user wishes to play again
+
+                # Returns to menu
+                self.game_running = None
+                self.menu_open = True
         else:
+            # Open menu
             if self.open_btn.is_pressed(e):
                 self.menu_open = True
+
+
+    def run_game(self):
+        """
+        To run the game
+        """
+
+        if self.game_running is not None:  # If there is a game running
+            for m in self.menu_items:  # Find the correct game
+                if self.game_running == m.name:  # Run the correct game
+                    m.game.update()
+                    m.game.draw(Values.screen)
 
 
 class Services:
@@ -333,7 +373,8 @@ class Services:
             self.music.draw()
 
         if self.games.enabled:
-            self.games.menu()
+            self.games.run_game()
+            self.games.draw_ui()
 
 
 services = Services()

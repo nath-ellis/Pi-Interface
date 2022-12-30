@@ -51,7 +51,7 @@ def main():
                 services.music.manage(e)
 
             if services.games.enabled:
-                services.games.manage_menu(e)
+                services.games.manage_controls(e)
 
         services.manage()
 
