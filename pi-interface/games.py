@@ -108,20 +108,15 @@ class FlappyBird:
         """
 
 
-        def __init__(self, x, y):
-            self.upper_icon = pygame.image.load(
-                os.path.join("../assets/games/flappybird", "upper_pipe.png")
-            )
+        def __init__(self, x, y, upper_icon, lower_icon):
+            self.upper_icon = upper_icon
             self.upper_rect = pygame.Rect(
                 x,
                 y,
                 self.upper_icon.get_width(),
                 self.upper_icon.get_height()
             )
-
-            self.lower_icon = pygame.image.load(
-                os.path.join("../assets/games/flappybird", "lower_pipe.png")
-            )
+            self.lower_icon = lower_icon
             self.lower_rect = pygame.Rect(
                 x,
                 y + self.upper_icon.get_height() + random.randint(70, 100),
@@ -175,10 +170,17 @@ class FlappyBird:
         self.bg_1_x = 0
         self.bg_2_x = self.bg.get_width()
         self.speed = 5
+        # Only loads the sprites once
+        self.pipe_upper_icon = pygame.image.load(
+                os.path.join("../assets/games/flappybird", "upper_pipe.png")
+            )
+        self.pipe_lower_icon = pygame.image.load(
+            os.path.join("../assets/games/flappybird", "lower_pipe.png")
+        )
         self.pipes = [
-            self.Pipe(520, -random.randint(125, 275)),
-            self.Pipe(720, -random.randint(125, 275)),
-            self.Pipe(920, -random.randint(125, 275))
+            self.Pipe(520, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon),
+            self.Pipe(720, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon),
+            self.Pipe(920, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon)
         ]
         self.state = "menu"
         self.logo = pygame.image.load(
@@ -201,8 +203,11 @@ class FlappyBird:
 
         screen.fill(Theme.background_colour)
 
-        screen.blit(self.bg, (self.bg_1_x, 0))
-        screen.blit(self.bg, (self.bg_2_x, 0))
+        # Don't draw it if it is off the screen
+        if not self.bg_1_x > Values.screen.get_width():
+            screen.blit(self.bg, (self.bg_1_x, 0))
+        if not self.bg_2_x > Values.screen.get_width():
+            screen.blit(self.bg, (self.bg_2_x, 0))
 
         if self.state == "menu":
             screen.blit(self.logo, (144, 40))
@@ -240,12 +245,12 @@ class FlappyBird:
                 self.bg_2_x = self.bg_1_x + self.bg.get_width()
             self.bg_2_x -= self.speed
 
-            # Moves pipes
+            # Moves pipes and checks collisions
             for p in self.pipes:
-                p.move(self.speed)
-
                 if p.is_colliding(self.player)[0] or p.is_colliding(self.player)[1]:
                     self.state = "game_over"
+
+                p.move(self.speed)
 
             self.player.manage_jumps()
 
@@ -272,24 +277,12 @@ class FlappyBird:
         """
 
         self.player = self.Player()
-        self.bg = pygame.image.load(
-            os.path.join("../assets/games/flappybird", "bg.png")
-        )
         self.speed = 5
         self.pipes = [
-            self.Pipe(520, -random.randint(125, 275)),
-            self.Pipe(720, -random.randint(125, 275)),
-            self.Pipe(920, -random.randint(125, 275))
+            self.Pipe(520, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon),
+            self.Pipe(720, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon),
+            self.Pipe(920, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon)
         ]
         self.state = state
-        self.logo = pygame.image.load(
-            os.path.join("../assets/games/flappybird", "flappy_bird.png")
-        )
-        self.input_prompt = pygame.image.load(
-            os.path.join("../assets/games/flappybird", "input_prompt.png")
-        )
-        self.game_over_img = pygame.image.load(
-            os.path.join("../assets/games/flappybird", "game_over.png")
-        )
         self.start_buffer = 5
 
