@@ -1,11 +1,13 @@
 """
 Games for the game service
 
-Games must be a class which has draw(screen), update() and reset()
+Games must be a class which has draw(screen), update(), manage_events(e) and reset()
 For the game to be run a GameMenuItem(x, y, icon, name, game_class) must be added to services.games.menu_items
 When it is chosen by the user update() and draw() are ran at the speed of values.Settings.fps
 reset() is run when a player presses the cross which is visible in every game (this is so that if a player wishes
 to play the game again it starts how it should instead of resuming where they left off)
+manage_events(e) is also ran at the speed of values.Settings.fps and is for operations which require an event such
+as pygame.MOUSEBUTTONDOWN
 """
 
 import os.path
@@ -70,20 +72,12 @@ class FlappyBird:
                 self.animation_speed -= 1
 
 
-        def controls(self):
+        def manage_jumps(self):
             """
             The player's controls
             """
 
-            mouse = pygame.mouse.get_pressed()
-
-            if mouse[0] and not self.is_jumping:
-                self.is_jumping = True
-
             if self.is_jumping:
-                if mouse[0] and self.jump_height <= 0:
-                    self.jump_height = 10
-
                 if self.jump_height >= -10:
                     self.rect.y -= self.jump_height
                     self.jump_height -= 1
@@ -92,6 +86,20 @@ class FlappyBird:
                     self.is_jumping = False
             else:
                 self.rect.y += self.y_velocity  # Gravity
+
+
+        def controls(self, e):
+            """
+            Controls for jumping
+            :param e: pygame event
+            """
+
+            if e.type == pygame.MOUSEBUTTONDOWN and not self.is_jumping:
+                self.is_jumping = True
+
+            if self.is_jumping:
+                if e.type == pygame.MOUSEBUTTONDOWN and self.jump_height <= 0:
+                    self.jump_height = 10
 
 
     class Pipe:
@@ -218,8 +226,6 @@ class FlappyBird:
         if self.state == "menu":
             self.start_buffer -= 1
 
-            if pygame.mouse.get_pressed()[0] and self.start_buffer <= 0:
-                self.state = "game"
         elif self.state == "game":
             # If player goes off the screen
             if self.player.rect.y > Values.screen.get_height() or self.player.rect.y < -100:
@@ -241,9 +247,22 @@ class FlappyBird:
                 if p.is_colliding(self.player)[0] or p.is_colliding(self.player)[1]:
                     self.state = "game_over"
 
-            self.player.controls()
-        elif self.state == "game_over":
-            if pygame.mouse.get_pressed()[0]:
+            self.player.manage_jumps()
+
+
+    def manage_events(self, e):
+        """
+        Manages events such as MOUSEBUTTONDOWN
+        :param e: pygame event
+        """
+
+        if self.state == "menu":
+            if e.type == pygame.MOUSEBUTTONDOWN and self.start_buffer <= 0:
+                self.state = "game"
+        elif self.state == "game":
+            self.player.controls(e)
+        else:
+            if e.type == pygame.MOUSEBUTTONDOWN:
                 self.reset("game")
 
 

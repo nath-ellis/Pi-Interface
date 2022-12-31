@@ -313,6 +313,10 @@ class Games:
                 config.init()  # Reset the config as all services are disabled while the game is run
                 self.menu_open = False
         elif self.game_running is not None:  # If there is a game running
+            for m in self.menu_items:
+                if self.game_running == m.name:
+                    m.game.manage_events(e)
+
             if self.close_btn.is_pressed(e):
                 for m in self.menu_items:
                     if self.game_running == m.name:
