@@ -26,7 +26,7 @@ def init():
                                 "../assets/images",
                                 v["backgroundImage"]
                             )
-                        )
+                        ).convert_alpha()
 
                     # Fullscreen
                     Theme.fullscreen = bool(v["fullscreen"])
@@ -78,7 +78,7 @@ def init():
                     services.exit.btn.y = int(v["ExitBtn"]["y"])
                     services.exit.btn.icon = pygame.image.load(
                         os.path.join("../assets/icons", v["ExitBtn"]["icon"])
-                    )
+                    ).convert_alpha()
 
                     # Clock
                     services.clock.enabled = bool(v["Clock"]["enabled"])
@@ -102,12 +102,12 @@ def init():
                     services.music.play_btn.y = int(v["Music"]["btnY"])
                     services.music.play_btn.icon = pygame.image.load(
                         os.path.join("../assets/icons", v["Music"]["playIcon"])
-                    )
+                    ).convert_alpha()
                     services.music.pause_btn.x = int(v["Music"]["btnX"])
                     services.music.pause_btn.y = int(v["Music"]["btnY"])
                     services.music.pause_btn.icon = pygame.image.load(
                         os.path.join("../assets/icons", v["Music"]["pauseIcon"])
-                    )
+                    ).convert_alpha()
 
                     # Games
                     services.games.enabled = bool(v["Games"]["enabled"])
@@ -115,12 +115,12 @@ def init():
                     services.games.open_btn.y = int(v["Games"]["iconY"])
                     services.games.open_btn.icon = pygame.image.load(
                         os.path.join("../assets/icons", v["Games"]["icon"])
-                    )
+                    ).convert_alpha()
                     services.games.close_btn.x = int(v["Games"]["crossX"])
                     services.games.close_btn.y = int(v["Games"]["crossY"])
                     services.games.close_btn.icon = pygame.image.load(
                         os.path.join("../assets/icons", v["Games"]["crossIcon"])
-                    )
+                    ).convert_alpha()
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

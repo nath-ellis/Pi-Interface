@@ -22,7 +22,7 @@ class Button:
         self.y = y
         self.icon = pygame.image.load(
             os.path.join("../assets/icons", icon)
-        )
+        ).convert_alpha()
 
 
     def is_pressed(self, e):

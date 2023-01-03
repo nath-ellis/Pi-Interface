@@ -31,16 +31,16 @@ class FlappyBird:
             self.icons = [
                 pygame.image.load(
                     os.path.join("../assets/games/flappybird", "bird_1.png")
-                ),
+                ).convert_alpha(),
                 pygame.image.load(
                     os.path.join("../assets/games/flappybird", "bird_2.png")
-                ),
+                ).convert_alpha(),
                 pygame.image.load(
                     os.path.join("../assets/games/flappybird", "bird_3.png")
-                ),
+                ).convert_alpha(),
                 pygame.image.load(
                     os.path.join("../assets/games/flappybird", "bird_2.png")
-                )
+                ).convert_alpha()
             ]
             self.rect = pygame.Rect(50, 50, self.icons[0].get_width(), self.icons[0].get_height())
             self.y_velocity = 10
@@ -172,11 +172,11 @@ class FlappyBird:
         self.speed = 5
         # Only loads the sprites once
         self.pipe_upper_icon = pygame.image.load(
-                os.path.join("../assets/games/flappybird", "upper_pipe.png")
-            )
+            os.path.join("../assets/games/flappybird", "upper_pipe.png")
+        ).convert_alpha()
         self.pipe_lower_icon = pygame.image.load(
             os.path.join("../assets/games/flappybird", "lower_pipe.png")
-        )
+        ).convert_alpha()
         self.pipes = [
             self.Pipe(520, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon),
             self.Pipe(720, -random.randint(0, 80), self.pipe_upper_icon, self.pipe_lower_icon),
@@ -185,13 +185,13 @@ class FlappyBird:
         self.state = "menu"
         self.logo = pygame.image.load(
             os.path.join("../assets/games/flappybird", "flappy_bird.png")
-        )
+        ).convert_alpha()
         self.input_prompt = pygame.image.load(
             os.path.join("../assets/games/flappybird", "input_prompt.png")
-        )
+        ).convert_alpha()
         self.game_over_img = pygame.image.load(
             os.path.join("../assets/games/flappybird", "game_over.png")
-        )
+        ).convert_alpha()
         self.start_buffer = 5  # To stop the game from immediately starting when clicked
 
 

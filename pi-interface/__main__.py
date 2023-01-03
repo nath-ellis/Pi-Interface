@@ -35,9 +35,10 @@ def main():
     pygame.init()
     config.init()
     pygame.display.set_caption("Pi Interface")
+    pygame.event.set_allowed([QUIT, MOUSEBUTTONDOWN])
 
     if Theme.fullscreen:
-        pygame.display.set_mode((0, 0), FULLSCREEN)
+        pygame.display.set_mode((0, 0), FULLSCREEN | DOUBLEBUF)
 
     if not Theme.mouse_cursor_visible:
         # Makes cursor invisible

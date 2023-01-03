@@ -11,7 +11,7 @@ class Values:
     For miscellaneous global variables
     """
     pygame_clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((480, 320))
+    screen = pygame.display.set_mode((480, 320), pygame.DOUBLEBUF)
     running = True
 
 
