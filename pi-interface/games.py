@@ -119,7 +119,7 @@ class FlappyBird:
             self.lower_icon = lower_icon
             self.lower_rect = pygame.Rect(
                 x,
-                y + self.upper_icon.get_height() + random.randint(70, 100),
+                y + self.upper_icon.get_height() + random.randint(90, 120),
                 self.lower_icon.get_width(),
                 self.lower_icon.get_height()
             )
