@@ -3,6 +3,7 @@ For parsing the config.yaml file
 """
 
 import os.path
+import pygame.font
 import yaml
 from values import *
 from services import services
@@ -64,6 +65,11 @@ def init():
                                          v["Font"]["deviceInfoFont"]),
                             int(v["Font"]["deviceInfoFontSize"])
                         )
+                        Theme.swapi_font = pygame.font.Font(
+                            os.path.join("../assets/fonts",
+                                         v["Font"]["swapiFont"]),
+                            int(v["Font"]["swapiFontSize"])
+                        )
                 except KeyError:
                     print("KeyError: Failed to load theme configuration. Reverting to default values.")
                 except NameError:
@@ -121,6 +127,13 @@ def init():
                     services.games.close_btn.icon = pygame.image.load(
                         os.path.join("../assets/icons", v["Games"]["crossIcon"])
                     ).convert_alpha()
+
+                    # Swapi
+                    services.swapi.enabled = bool(v["Swapi"]["enabled"])
+                    services.swapi.x = int(v["Swapi"]["x"])
+                    services.swapi.y = int(v["Swapi"]["y"])
+                    services.swapi.default_timer_val = int(v["Swapi"]["updateTime"])
+                    services.swapi.line_height = int(v["Swapi"]["lineHeight"])
                 except KeyError:
                     print("KeyError: Failed to load service configuration. Reverting to default values.")
                 except NameError:

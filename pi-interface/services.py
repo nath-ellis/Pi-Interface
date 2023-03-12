@@ -1,10 +1,13 @@
 """
 For all the different services available.
 """
+
 import datetime
 import platform
+import random
 import socket
 import psutil
+import requests
 import games
 import config
 from values import *
@@ -140,7 +143,7 @@ class DeviceInfo:
             platform.system() + " " + platform.machine(),
             str(round(psutil.cpu_percent(), 2)) + "% CPU Usage",
             str(round(psutil.virtual_memory().percent, 2)) + "% Memory Usage",
-            str(round(psutil.disk_usage("/").percent, 2)) + "% Disk Usage"
+            str(round(psutil.disk_usage("/").percent, 2)) + "% Disk Usage",
         ]
 
 
@@ -303,6 +306,7 @@ class Games:
                     services.clock.enabled = False
                     services.device_info.enabled = False
                     services.music.enabled = False
+                    services.swapi.enabled = False
 
                     # Close menu and run game
                     self.game_running = m.name
@@ -343,6 +347,133 @@ class Games:
                     m.game.draw(Values.screen)
 
 
+class Swapi:
+    """
+    Star Wars facts service
+    """
+
+    def __init__(self, x, y):
+        self.enabled = True
+        self.x = x
+        self.y = y
+        self.timer = 0
+        self.default_timer_val = 320
+        self.info = []
+        self.line_height = 20
+
+
+    async def update(self):
+        """
+        Updates the information
+        """
+
+        if self.timer <= 0:
+            url = "http://swapi.dev/api"
+
+            match (random.randint(1, 3)):
+                case 1:
+                    url += "/vehicles"
+                case 2:
+                    url += "/starships"
+                case 3:
+                    url += "/planets"
+
+            url += "?format=json"
+
+            if "vehicles" in url or "starships" in url:
+                url += "&page=" + str(random.randint(1, 4))
+            else:
+                url += "&page=" + str(random.randint(1, 6))
+
+            self.info = []
+
+            try:
+                req = requests.get(url)
+
+                data = req.json()["results"]
+                index = random.randint(0, len(data) - 1)
+
+                if "vehicles" in url or "starships" in url:
+                    match (random.randint(1, 5)):
+                        case 1:
+                            if len(data[index]["cost_in_credits"]) > 7:
+                                self.info.append("It would cost " + data[index]["cost_in_credits"])
+                                self.info.append("credits to buy " + data[index]["name"])
+                            else:
+                                self.info.append("It would cost " + data[index]["cost_in_credits"] + " credits")
+                                self.info.append("to buy " + data[index]["name"])
+                        case 2:
+                            if len(data[index]["name"]) > 15:
+                                self.info.append(data[index]["name"])
+                                self.info.append("can hold " + data[index]["passengers"] + " passengers")
+                            elif len(data[index]["name"]) > 10:
+                                self.info.append(data[index]["name"] + " can hold")
+                                self.info.append(data[index]["passengers"] + " passengers")
+                            else:
+                                self.info.append(data[index]["name"] + " can hold " + data[index]["passengers"] + " passengers")
+                        case 3:
+                            if len(data[index]["name"]) > 10:
+                                self.info.append(data[index]["name"] + " was")
+
+                                if len(data[index]["manufacturer"]) > 10:
+                                    self.info.append("manufactured by")
+                                    self.info.append(data[index]["manufacturer"])
+                                else:
+                                    self.info.append("manufactured by " + data[index]["manufacturer"])
+                            else:
+                                self.info.append(data[index]["name"] + " was manufactured by")
+                                self.info.append(data[index]["manufacturer"])
+                        case 4:
+                            if len(data[index]["name"]) > 10:
+                                self.info.append(data[index]["name"])
+                                self.info.append("requires a crew of " + data[index]["crew"])
+                            else:
+                                self.info.append(data[index]["name"] + " requires a crew of " + data[index]["crew"])
+                        case 5:
+                            if len(data[index]["name"]) > 10:
+                                self.info.append(data[index]["name"])
+                                self.info.append("is " + data[index]["length"] + "m long")
+                            else:
+                                self.info.append(data[index]["name"] + " is " + data[index]["length"] + "m long")
+                else:
+                    if data[index]["population"] == "unknown":
+                        self.info.append(data[index]["name"] + " has an")
+                        self.info.append("unknown population")
+                    else:
+                        self.info.append(data[index]["name"] + " has a population")
+                        self.info.append("of " + data[index]["population"])
+            except requests.exceptions.ConnectionError:
+                self.info.append("Connection Error")
+            except requests.exceptions.Timeout:
+                self.info.append("Request Timed Out")
+            except requests.exceptions.HTTPError:
+                self.info.append("HTTP Error")
+            except requests.exceptions.JSONDecodeError:
+                self.info.append("Failed to decode response")
+            except requests.exceptions.InvalidJSONError:
+                self.info.append("Invalid response")
+
+            self.timer = self.default_timer_val
+        else:
+            self.timer -= 1
+
+
+    def draw(self):
+        """
+        Draws the information
+        """
+
+        y = self.y
+
+        for i in self.info:
+            Values.screen.blit(
+                Theme.swapi_font.render(i, True, Theme.primary_colour),
+                (self.x, y)
+            )
+
+            y += self.line_height
+
+
 class Services:
     """
     Stores and manages the instances of the services
@@ -355,9 +486,10 @@ class Services:
         self.device_info = DeviceInfo(10, 10 , 30)
         self.music = Music(390, 220)
         self.games = Games(438, 10, 10, 10)
+        self.swapi = Swapi(10, 160)
 
 
-    def manage(self):
+    async def manage(self):
         """
         Decides which services should be run
         """
@@ -375,6 +507,10 @@ class Services:
 
         if self.music.enabled:
             self.music.draw()
+
+        if self.swapi.enabled:
+            await self.swapi.update()
+            self.swapi.draw()
 
         if self.games.enabled:
             self.games.run_game()

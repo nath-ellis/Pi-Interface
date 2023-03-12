@@ -21,6 +21,8 @@ Theme:
     clockFontSize: 100
     deviceInfoFont: "apollo.ttf"
     deviceInfoFontSize: 25
+    swapiFont: "apollo.ttf"
+    swapiFontSize: 25
 ---
 Services:
   ExitBtn:
@@ -65,6 +67,15 @@ Services:
     crossIcon: "cross.png"
     crossX: 10
     crossY: 10
+  # Uses the https://swapi.dev api to create various Star Wars facts
+  Swapi:
+    enabled: true
+    x: 10
+    y: 160
+    # Number of frames between updates
+    updateTime: 320
+    # Space between each line
+    lineHeight: 20
 ---
 Settings:
   fps: 30

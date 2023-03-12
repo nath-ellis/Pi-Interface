@@ -2,6 +2,7 @@
 __main__.py
 """
 
+import asyncio
 import os
 
 os.chdir(
@@ -61,7 +62,7 @@ def main():
             if services.games.enabled:
                 services.games.manage_controls(e)
 
-        services.manage()
+        asyncio.run(services.manage())
 
         redraw()
 
